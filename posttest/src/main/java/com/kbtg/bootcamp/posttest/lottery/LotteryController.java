@@ -25,7 +25,7 @@ public class LotteryController {
             @ApiResponse(responseCode = "200", description = "list all lotteries",
                     content = {
                             @Content(mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = LotteryRepository.class)))
+                                    array = @ArraySchema(schema = @Schema(implementation = LotteryResponse.class)))
                     })
     })
     @RequestMapping(value = "", method = RequestMethod.GET)

@@ -4,19 +4,17 @@ import com.kbtg.bootcamp.posttest.exception.NotFoundException;
 import com.kbtg.bootcamp.posttest.lottery.Lottery;
 import com.kbtg.bootcamp.posttest.lottery.LotteryRepository;
 import com.kbtg.bootcamp.posttest.lottery.LotteryResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UserService {
-
-    private final UserRepository userRepository;
-    private final LotteryRepository lotteryRepository;
-    public UserService(UserRepository userRepository, LotteryRepository lotteryRepository) {
-        this.userRepository = userRepository;
-        this.lotteryRepository = lotteryRepository;
-    }
+    @Autowired
+    private  UserRepository userRepository;
+    @Autowired
+    private  LotteryRepository lotteryRepository;
 
     public UserResponse getLotteriesByUserID(Integer userId) {
         List<User> userLotteries = findUserLotteriesByUserID(userId);
@@ -44,7 +42,7 @@ public class UserService {
                 .toArray(String[]::new);
     }
 
-    private Integer calculateTotalLotteryCost(List<User> userLotteries) {
+    public Integer calculateTotalLotteryCost(List<User> userLotteries) {
         return userLotteries.stream()
                 .map(User::getLottery)
                 .map(Lottery::getPrice)

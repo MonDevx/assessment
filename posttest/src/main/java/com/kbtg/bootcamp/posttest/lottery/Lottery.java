@@ -25,6 +25,13 @@ public class Lottery {
         this.amount = amount;
     }
 
+    public Lottery(Integer id, String ticket, Integer price, Integer amount) {
+        this.id = id;
+        this.ticket = ticket;
+        this.price = price;
+        this.amount = amount;
+    }
+
     public Integer getId() {
         return id;
     }

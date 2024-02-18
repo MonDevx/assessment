@@ -40,7 +40,7 @@ public class UserController {
             })
     })
     @GetMapping("/{userId}/lotteries")
-    public UserResponse getLotteriesByUserID(@PathVariable Integer userId) {
+    public UserResponse getLotteriesByUserID(@PathVariable @Valid @ValidUserId Integer userId) {
         return this.userService.getLotteriesByUserID(userId);
     }
 
@@ -48,10 +48,10 @@ public class UserController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Delete user lottery",   content = {
                     @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserResponse.class))
+                            schema = @Schema(implementation = LotteryResponse.class))
             })
     })
-    @DeleteMapping("/users/{userId}/lotteries/{ticketId}")
+    @DeleteMapping("/{userId}/lotteries/{ticketId}")
     public LotteryResponse deleteLotterUser(@PathVariable @Valid @ValidUserId Integer userId, @PathVariable Integer ticketId) {
         return  this.userService.deleteUserTicketsByUserIdAndTicket(userId, ticketId);
     }

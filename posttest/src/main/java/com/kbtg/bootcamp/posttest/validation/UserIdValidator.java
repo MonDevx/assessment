@@ -9,15 +9,8 @@ public class UserIdValidator implements ConstraintValidator<ValidUserId, Integer
     public void initialize(ValidUserId constraintAnnotation) {
     }
 
-    public UserIdValidator() {
-    }
-
     @Override
     public boolean isValid(Integer userId, ConstraintValidatorContext constraintValidatorContext) {
-        return userId.toString().length() == 10;
-    }
-
-    public Boolean isValid(Integer userId) {
-        return userId.toString().length() == 10;
+        return userId != null && userId.toString().length() == 10;
     }
 }

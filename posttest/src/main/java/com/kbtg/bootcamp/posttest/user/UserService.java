@@ -11,10 +11,14 @@ import java.util.List;
 
 @Service
 public class UserService {
-    @Autowired
     private  UserRepository userRepository;
-    @Autowired
+
     private  LotteryRepository lotteryRepository;
+    @Autowired
+    public UserService(UserRepository userRepository, LotteryRepository lotteryRepository) {
+        this.userRepository = userRepository;
+        this.lotteryRepository = lotteryRepository;
+    }
 
     public UserResponse getLotteriesByUserID(Integer userId) {
         List<User> userLotteries = findUserLotteriesByUserID(userId);
@@ -27,7 +31,7 @@ public class UserService {
         return new UserResponse(lotteries, count, cost);
     }
 
-    private List<User> findUserLotteriesByUserID(Integer userId) {
+    public List<User> findUserLotteriesByUserID(Integer userId) {
         List<User> userLotteries = userRepository.findAllByUserID(userId);
         if (userLotteries.isEmpty()) {
             throw new NotFoundException("User not found.");
@@ -35,7 +39,7 @@ public class UserService {
         return userLotteries;
     }
 
-    private String[] getLotteryTickets(List<User> userLotteries) {
+    public String[] getLotteryTickets(List<User> userLotteries) {
         return userLotteries.stream()
                 .map(User::getLottery)
                 .map(Lottery::getTicket)
@@ -58,12 +62,12 @@ public class UserService {
 
 
 
-    private Lottery findLotteryById(Integer ticketId) {
+    public Lottery findLotteryById(Integer ticketId) {
         return lotteryRepository.findById(ticketId)
                 .orElseThrow(() -> new NotFoundException("Lottery not found."));
     }
 
-    private User createUserWithLottery(Integer userId, Lottery lottery) {
+    public User createUserWithLottery(Integer userId, Lottery lottery) {
 
         User user = new User(lottery, userId);
         userRepository.save(user);
@@ -78,7 +82,7 @@ public class UserService {
         return new LotteryResponse(userLottery.getLottery().getTicket());
     }
 
-    private User findUserLotteryByUserIDAndLotteryID(Integer userId, Integer ticketId) {
+    public User findUserLotteryByUserIDAndLotteryID(Integer userId, Integer ticketId) {
         return userRepository.findUserLotteryByUserIDAndLotteryID(userId, ticketId)
                 .orElseThrow(() -> new NotFoundException("User or lottery not found."));
     }

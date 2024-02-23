@@ -23,7 +23,7 @@ public class AdminController {
 
 
     @Operation(summary = "Create lottery")
-    @RequestMapping(value = "/lotteries", method = RequestMethod.POST)
+    @PostMapping(value = "/lotteries")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Create lottery",   content = {
                     @Content(mediaType = "application/json",

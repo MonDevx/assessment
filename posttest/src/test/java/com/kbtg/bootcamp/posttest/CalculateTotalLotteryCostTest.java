@@ -1,10 +1,14 @@
 package com.kbtg.bootcamp.posttest;
 
 import com.kbtg.bootcamp.posttest.lottery.Lottery;
+import com.kbtg.bootcamp.posttest.lottery.LotteryService;
 import com.kbtg.bootcamp.posttest.user.User;
 import com.kbtg.bootcamp.posttest.user.UserService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,14 +16,18 @@ import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CalculateTotalLotteryCostTests {
+public class CalculateTotalLotteryCostTest {
 
-
-
+    @InjectMocks
+    private UserService userService;
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
     @Test
     @DisplayName("Check calculate sum price tickets user")
     void checkCalculateSumPriceTicketsUser() {
-        UserService userService = new UserService();
+
         Random rand = new Random();
 
         User user1 = createUserWithLottery(rand.nextInt(120));

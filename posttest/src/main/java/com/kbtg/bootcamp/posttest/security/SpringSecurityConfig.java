@@ -22,7 +22,7 @@ public class SpringSecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests((requests) ->
+                .authorizeHttpRequests(requests ->
                         requests
                                 .requestMatchers("/admin").hasAnyRole("ADMIN")
                                 .requestMatchers("/users/**").permitAll()

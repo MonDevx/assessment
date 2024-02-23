@@ -7,8 +7,12 @@ import java.util.List;
 
 @Service
 public class LotteryService {
-    @Autowired
+
     private  LotteryRepository lotteryRepository;
+    @Autowired
+    public LotteryService(LotteryRepository lotteryRepository) {
+        this.lotteryRepository = lotteryRepository;
+    }
 
 
     public TicketsNumberResponse getLotteries() {
